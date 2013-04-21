@@ -8,7 +8,7 @@ A simple parser for a minimalist [hardware description language](http://en.wikip
 
 Here's an example definition of a chip called 'and.hdl':
 
-```
+```ruby
 # and.hdl
 inputs  a, b
 outputs out
@@ -27,7 +27,7 @@ The above chip references another chip called 'nand'.
 
 Here's its definition, as a truth table:
 
-```
+```ruby
 # nand.hdl
 inputs  a, b
 outputs out
