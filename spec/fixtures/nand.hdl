@@ -1,5 +1,7 @@
+# nand.hdl
 inputs  a, b
 outputs out
+
 | a | b | out |
 | 0 | 0 |  1  |
 | 0 | 1 |  1  |

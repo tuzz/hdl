@@ -1,8 +1,10 @@
 grammar Pins
+  include Vars
+
   rule pins
     inputs ws outputs {
       def to_hash
-        { :inputs => inputs.vars.to_a, :outputs => outputs.vars.to_a }
+        { :inputs => inputs.vars.to_array, :outputs => outputs.vars.to_array }
       end
     }
   end
@@ -13,21 +15,5 @@ grammar Pins
 
   rule outputs
     "outputs" ws vars
-  end
-
-  rule vars
-    var ("," ws? vars)* {
-      def to_a
-        text_value.split(",").map { |s| s.strip.to_sym }
-      end
-    }
-  end
-
-  rule var
-    [a-z] [a-z0-9_]*
-  end
-
-  rule ws
-    [ \t\r\n]+
   end
 end

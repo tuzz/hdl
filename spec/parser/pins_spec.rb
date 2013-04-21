@@ -2,46 +2,6 @@ require "spec_helper"
 
 describe PinsParser do
 
-  describe "ws" do
-    valid(["    ", "  \t  \t", "\n\n", "\r\n\t  \r \t"])
-    invalid(["a", "_", "  _", " r n t ", "."])
-  end
-
-  describe "var" do
-    valid(["a", "foo", "a123", "foo999", "a_b", "a_1_b_2"])
-    invalid(["a b", "A", "0", "_", "Asd", "0ab", "_foo"])
-  end
-
-  describe "vars" do
-    valid(["a, b", "out", "a, b,c, d", "a,\n\n b", "a_b1, c"])
-    invalid(["a ,b", "A", "fooBar", "a\n,b", "a,b ,d", ""])
-
-    describe "#to_a" do
-      it "returns an array of the variable names as symbols" do
-        expectations = {
-          "a, b"       => [:a, :b],
-          "out"        => [:out],
-          "a0, b1, c2" => [:a0, :b1, :c2],
-          "foo_bar"    => [:foo_bar]
-        }
-
-        expectations.each do |input, output|
-          subject.parse(input).to_a.should == output
-        end
-      end
-    end
-  end
-
-  describe "inputs" do
-    valid(["inputs a, b", "inputs a_b", "inputs a0,b1,c2"])
-    invalid(["input a", "inputsa", "inputs 0abc", "inputs"])
-  end
-
-  describe "outputs" do
-    valid(["outputs out", "outputs a0", "outputs \n\r\t asd"])
-    invalid(["", "output a", "outputs _a", "outputs"])
-  end
-
   describe "pins" do
     valid([
       "inputs a, b \n outputs out",
@@ -68,6 +28,16 @@ describe PinsParser do
         end
       end
     end
+  end
+
+  describe "inputs" do
+    valid(["inputs a, b", "inputs a_b", "inputs a0,b1,c2"])
+    invalid(["input a", "inputsa", "inputs 0abc", "inputs"])
+  end
+
+  describe "outputs" do
+    valid(["outputs out", "outputs a0", "outputs \n\r\t asd"])
+    invalid(["", "output a", "outputs _a", "outputs"])
   end
 
 end

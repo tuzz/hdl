@@ -1,0 +1,21 @@
+grammar Vars
+  rule vars
+    var ("," ws? vars)* {
+      def to_array
+        TreeWalker.walk(self, :to_sym)
+      end
+    }
+  end
+
+  rule var
+    [a-z] [a-z0-9_]* {
+      def to_sym
+        text_value.to_sym
+      end
+    }
+  end
+
+  rule ws
+    [ \t\r\n]+
+  end
+end

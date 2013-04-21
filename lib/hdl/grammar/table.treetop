@@ -1,0 +1,46 @@
+grammar Table
+  include Vars
+
+  rule table
+    header rows:(ws* row)+ {
+      def to_array
+        headers = header.header_cells.to_array
+        data = TreeWalker.walk(rows, :to_array)
+
+        data.map { |d| Hash[headers.zip(d)] }
+      end
+    }
+  end
+
+  rule header
+    "|" header_cells "|"
+  end
+
+  rule row
+    "|" row_cells "|"
+  end
+
+  rule header_cells
+    ws* var ws* ("|" header_cells)* {
+      def to_array
+        TreeWalker.walk(self, :to_sym)
+      end
+    }
+  end
+
+  rule row_cells
+    ws* boolean ws* ("|" row_cells)* {
+      def to_array
+        TreeWalker.walk(self, :to_bool)
+      end
+    }
+  end
+
+  rule boolean
+    [01TF] {
+      def to_bool
+        ["1", "T"].include?(text_value)
+      end
+    }
+  end
+end
