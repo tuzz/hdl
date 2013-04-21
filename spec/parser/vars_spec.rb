@@ -39,11 +39,6 @@ describe VarsParser do
     end
   end
 
-  describe "ws" do
-    valid(["    ", "  \t  \t", "\n\n", "\r\n\t  \r \t"])
-    invalid(["a", "_", "  _", " r n t ", "."])
-  end
-
   describe "boolean" do
     valid(["0", "1", "T", "F"])
     invalid(["", " 0", "1 ", "t", "FF"])
@@ -62,6 +57,28 @@ describe VarsParser do
         end
       end
     end
+  end
+
+  describe "ws" do
+    valid(["    ", "  \t  \t", "\n\n", "\r\n\t  \r \t"])
+    invalid(["a", "_", "  _", " r n t ", "."])
+  end
+
+
+  describe "comment" do
+    valid([
+      "# This is a comment.\n",
+      "#\n",
+      "### comment ###\n",
+      "# nand(a=a, b=b, out=out)\n",
+      "# inputs a, b\n"
+    ])
+
+    invalid([
+      "// This is not a comment.\n",
+      "# missing a newline",
+      "# capturing too much\n\n\n\n"
+    ])
   end
 
 end

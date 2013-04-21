@@ -1,4 +1,9 @@
+# mux.hdl
+
+# inputs
 inputs a, b, sel
+
+# outputs
 outputs out
 
 not(in=sel, out=nots)

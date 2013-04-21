@@ -4,7 +4,7 @@ grammar HDL
   include Table
 
   rule hdl
-    pins ws body:(schema / table) ws {
+    ws? pins ws body:(schema / table) ws? {
       def structured
         {
           :inputs => pins.input_array,

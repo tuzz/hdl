@@ -1,8 +1,16 @@
+# nand.hdl
 inputs  a, b
 outputs out
+
+# truth table
 
 | a | b | out |
 | 0 | 0 |  T  |
 | 0 | 1 |  T  |
+
+# comment
+
 | 1 | 0 |  T  |
 | 1 | 1 |  F  |
+
+# comment

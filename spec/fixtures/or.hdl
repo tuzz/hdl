@@ -1,11 +1,13 @@
+# or.hdl
 inputs a, b
 outputs out
 
-not(in=a, out=nota)
+not(in=a, out=nota) # comment
 not(in=b, out=notb)
 
-nand(
+nand( # comment
+      # comment
   a = nota,
-  b = notb,
+  b = notb, # comment
   out = out
 )

@@ -1,3 +1,4 @@
+# xor.hdl
 inputs a, b
 outputs out
 

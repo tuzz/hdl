@@ -1,3 +1,5 @@
+# half_adder.hdl
+
 inputs
   a,
   b
