@@ -35,12 +35,4 @@ grammar Table
       end
     }
   end
-
-  rule boolean
-    [01TF] {
-      def to_bool
-        ["1", "T"].include?(text_value)
-      end
-    }
-  end
 end

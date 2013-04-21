@@ -44,4 +44,24 @@ describe VarsParser do
     invalid(["a", "_", "  _", " r n t ", "."])
   end
 
+  describe "boolean" do
+    valid(["0", "1", "T", "F"])
+    invalid(["", " 0", "1 ", "t", "FF"])
+
+    describe "#to_bool" do
+      it "returns the ruby boolean equivalent" do
+        expectations = {
+          "0" => false,
+          "1" => true,
+          "F" => false,
+          "T" => true
+        }
+
+        expectations.each do |input, output|
+          subject.parse(input).to_bool.should == output
+        end
+      end
+    end
+  end
+
 end

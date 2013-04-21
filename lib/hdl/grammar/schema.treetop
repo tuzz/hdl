@@ -1,0 +1,45 @@
+grammar Schema
+  include Vars
+
+  rule schema
+    (ws* chip)+ {
+      def to_array
+        names  = TreeWalker.walk(self, :name)
+        hashes = TreeWalker.walk(self, :to_hash)
+
+        names.zip(hashes).map { |n, h| { n => h } }
+      end
+    }
+  end
+
+  rule chip
+    var "(" arguments ")" {
+      def name
+        var.to_sym
+      end
+    }
+  end
+
+  rule arguments
+    argument ("," arguments)* ws? {
+      def to_hash
+        lefts  = TreeWalker.walk(self, :left)
+        rights = TreeWalker.walk(self, :right)
+
+        Hash[lefts.zip(rights)]
+      end
+    }
+  end
+
+  rule argument
+    ws? l:var ws? "=" ws? r:(var / boolean) {
+      def left
+        l.to_sym
+      end
+
+      def right
+        r.respond_to?(:to_sym) ? r.to_sym : r.to_bool
+      end
+    }
+  end
+end
