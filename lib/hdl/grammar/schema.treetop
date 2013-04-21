@@ -2,7 +2,7 @@ grammar Schema
   include Vars
 
   rule schema
-    (ws* chip)+ {
+    (ws? chip)+ {
       def to_array
         names  = TreeWalker.walk(self, :name)
         hashes = TreeWalker.walk(self, :to_hash)
