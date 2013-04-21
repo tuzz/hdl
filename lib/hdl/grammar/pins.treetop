@@ -3,8 +3,12 @@ grammar Pins
 
   rule pins
     inputs ws outputs {
-      def to_hash
-        { :inputs => inputs.vars.to_array, :outputs => outputs.vars.to_array }
+      def input_array
+        inputs.vars.to_array
+      end
+
+      def output_array
+        outputs.vars.to_array
       end
     }
   end

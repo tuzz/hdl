@@ -1,0 +1,17 @@
+grammar HDL
+  include Pins
+  include Schema
+  include Table
+
+  rule hdl
+    pins ws body:(schema / table) ws {
+      def structured
+        {
+          :inputs => pins.input_array,
+          :outputs => pins.output_array,
+          body.key => body.to_array
+        }
+      end
+    }
+  end
+end

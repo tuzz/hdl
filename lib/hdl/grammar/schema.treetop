@@ -9,6 +9,10 @@ grammar Schema
 
         names.zip(hashes).map { |n, h| { n => h } }
       end
+
+      def key
+        :schema
+      end
     }
   end
 

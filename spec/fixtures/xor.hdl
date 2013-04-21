@@ -1,0 +1,6 @@
+inputs a, b
+outputs out
+
+or(a=a, b=b, out=or)
+nand(a=a, b=b, out=nand)
+and(a=or, b=nand, out=out)

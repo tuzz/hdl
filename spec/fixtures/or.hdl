@@ -1,0 +1,11 @@
+inputs a, b
+outputs out
+
+not(in=a, out=nota)
+not(in=b, out=notb)
+
+nand(
+  a = nota,
+  b = notb,
+  out = out
+)

@@ -9,7 +9,8 @@ def valid(array)
 
   it "matches valid" do
     array.each do |v|
-      subject.parse(v).should_not be_nil, v
+      subject.parse(v).should_not be_nil,
+        [subject.failure_reason, v].join("\n")
     end
   end
 end

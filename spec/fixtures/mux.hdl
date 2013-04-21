@@ -1,0 +1,9 @@
+inputs a, b, sel
+outputs out
+
+not(in=sel, out=nots)
+
+and(a=a, b=nots, out=t1)
+and(a=b, b=sel,  out=t2)
+
+or(a=t1, b=t2, out=out)

@@ -9,6 +9,10 @@ grammar Table
 
         data.map { |d| Hash[headers.zip(d)] }
       end
+
+      def key
+        :table
+      end
     }
   end
 

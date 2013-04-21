@@ -1,0 +1,10 @@
+inputs
+  a,
+  b
+
+outputs
+  sum,
+  carry
+
+xor(a=a, b=b, out=sum)
+and(a=a, b=b, out=carry)

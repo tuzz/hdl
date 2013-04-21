@@ -16,15 +16,28 @@ describe PinsParser do
       "inputs a outputs b  "
     ])
 
-    describe "#to_hash" do
-      it "returns a hash of the input and output pins" do
+    describe "#input_array" do
+      it "returns a symbolized array of inputs" do
         expectations = {
-          "inputs a, b outputs c" => { :inputs => [:a, :b], :outputs => [:c] },
-          "inputs a \n outputs b" => { :inputs => [:a], :outputs => [:b] }
+          "inputs a, b outputs c" => [:a, :b],
+          "inputs a \n outputs b" => [:a]
         }
 
         expectations.each do |input, output|
-          subject.parse(input).to_hash.should == output
+          subject.parse(input).input_array.should == output
+        end
+      end
+    end
+
+    describe "#output_array" do
+      it "returns a symbolized array of outputs" do
+        expectations = {
+          "inputs a, b outputs c" => [:c],
+          "inputs a \n outputs b" => [:b]
+        }
+
+        expectations.each do |input, output|
+          subject.parse(input).output_array.should == output
         end
       end
     end
