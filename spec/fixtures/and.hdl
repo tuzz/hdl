@@ -1,0 +1,6 @@
+# and.hdl
+inputs  a, b
+outputs out
+
+nand(a=a, b=b, out=x)
+nand(a=x, b=x, out=out)
