@@ -6,9 +6,10 @@ end
 
 require "polyglot"
 require "treetop"
-require "hdl/tree_walker.rb"
-require "hdl/grammar/vars"
-require "hdl/grammar/pins"
-require "hdl/grammar/table"
-require "hdl/grammar/schema"
-require "hdl/grammar/hdl"
+
+require "hdl/parser/tree_walker.rb"
+require "hdl/parser/grammar/vars"
+require "hdl/parser/grammar/pins"
+require "hdl/parser/grammar/table"
+require "hdl/parser/grammar/schema"
+require "hdl/parser/grammar/hdl"
