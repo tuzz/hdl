@@ -20,4 +20,9 @@ class HDL::Parser::Validator
     validator.validate!(@hash)
   end
 
+  private
+  def raise(string)
+    super(ParseError.new(string))
+  end
+
 end
