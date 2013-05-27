@@ -1,14 +1,7 @@
-module HDL
-  def self.path
-    []
-  end
-end
-
 require "set"
-
 require "polyglot"
 require "treetop"
-
+require "hdl/base"
 require "hdl/parser"
 require "hdl/parser/validator"
 require "hdl/parser/validator/input_validator"

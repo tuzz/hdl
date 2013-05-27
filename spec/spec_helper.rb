@@ -1,7 +1,12 @@
 require "rspec"
 require "hdl"
 
-HDL.path << "spec/fixtures"
+RSpec.configure do |config|
+  config.before do
+    HDL.path = nil # Reset to default
+    HDL.path << "spec/fixtures"
+  end
+end
 
 def valid(array)
   root = description

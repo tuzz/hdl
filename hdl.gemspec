@@ -1,6 +1,8 @@
+require "./lib/hdl/base"
+
 Gem::Specification.new do |s|
   s.name        = "hdl"
-  s.version     = "0.0.0.alpha"
+  s.version     = HDL.version
   s.summary     = "HDL"
   s.description = "A simple parser for a minimalist hardware description language."
   s.author      = "Chris Patuzzo"
