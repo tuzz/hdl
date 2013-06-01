@@ -39,7 +39,26 @@ describe HDL::SchemaChip do
   end
 
   describe "#evaluate" do
-    pending
+    it "delegates to an evaluator" do
+      HDL::SchemaChip::Evaluator.should_receive(:evaluate)
+      subject.evaluate(:a => true, :b => true)
+    end
+
+    it "raises an argument error if any other pin is set" do
+      expect {
+        subject.evaluate(:a => true, :b => true, :x => true)
+      }.to raise_error(ArgumentError, /Expecting inputs \[:a, :b\]/)
+
+      expect {
+        subject.evaluate(:a => true, :b => true, :out => true)
+      }.to raise_error(ArgumentError, /Expecting inputs \[:a, :b\]/)
+    end
+
+    it "raises an argument error if an input is not set" do
+      expect {
+        subject.evaluate(:a => false)
+      }.to raise_error(ArgumentError, /Expecting inputs \[:a, :b\]/)
+    end
   end
 
 end

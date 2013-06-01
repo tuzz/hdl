@@ -31,4 +31,11 @@ class HDL::Chip
     deps.map { |d| HDL::Loader.load(d) }
   end
 
+  def check_pins!(pins)
+    unless pins.keys.to_set == inputs.to_set
+      err = "Expecting inputs #{inputs.inspect}, given #{pins.keys.inspect}"
+      raise ArgumentError, err
+    end
+  end
+
 end

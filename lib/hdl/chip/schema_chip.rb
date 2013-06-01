@@ -12,8 +12,8 @@ class HDL::SchemaChip < HDL::Chip
   end
 
   def components
-    chips = component_names.map do |c|
-      HDL::Loader.load(c)
+    chips = component_names.map do |name|
+      HDL::Loader.load(name)
     end
 
     freq = frequencies(chips)
@@ -26,6 +26,11 @@ class HDL::SchemaChip < HDL::Chip
 
   def primitive?
     false
+  end
+
+  def evaluate(pins = {})
+    check_pins!(pins)
+    Evaluator.evaluate(pins)
   end
 
   private

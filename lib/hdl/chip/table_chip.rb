@@ -25,13 +25,6 @@ class HDL::TableChip < HDL::Chip
   end
 
   private
-  def check_pins!(pins)
-    unless pins.keys.to_set == inputs.to_set
-      err = "Expecting inputs #{inputs.inspect}, given #{pins.keys.inspect}"
-      raise ArgumentError, err
-    end
-  end
-
   def find_row(pins)
     @table.detect do |row|
       inputs.all? { |i| row[i] == pins[i] }
