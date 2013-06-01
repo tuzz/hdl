@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe HDL::PrimitiveChip do
+describe HDL::TableChip do
   subject do
     input = File.read("spec/fixtures/nand.hdl")
     data = HDL::Parser.parse(input)
 
-    HDL::PrimitiveChip.new("nand", "/some/path", data)
+    HDL::TableChip.new("nand", "/some/path", data)
   end
 
   describe "accessors" do

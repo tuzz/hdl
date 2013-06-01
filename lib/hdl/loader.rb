@@ -14,7 +14,7 @@ class HDL::Loader
         data = HDL::Parser.parse(file.read)
 
         if data[:table]
-          klass = HDL::PrimitiveChip
+          klass = HDL::TableChip
         else
           klass = HDL::Chip
         end
