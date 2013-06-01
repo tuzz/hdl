@@ -1,13 +1,8 @@
 class HDL::TableChip < HDL::Chip
 
-  attr_reader :name, :path, :inputs, :outputs
-
   def initialize(name, path, data)
-    @name    = name.to_s
-    @path    = path
-    @inputs  = data[:inputs]
-    @outputs = data[:outputs]
-    @table   = data[:table]
+    super
+    @table = data[:table]
   end
 
   def internal;   [] end
