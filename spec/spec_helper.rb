@@ -6,6 +6,7 @@ RSpec.configure do |config|
     # Reset the internal state of the loader
     HDL::Loader.instance_variable_set(:@path, nil)
     HDL::Loader.instance_variable_set(:@memo, nil)
+    HDL::Dependency.instance_variable_set(:@dependencies, nil)
 
     HDL.path << "spec/fixtures"
   end
