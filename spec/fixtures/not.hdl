@@ -1,0 +1,4 @@
+inputs  in
+outputs out
+
+nand(a=0, b=in, out=out)

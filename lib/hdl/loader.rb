@@ -8,6 +8,8 @@ class HDL::Loader
 
     def load(name, options = {})
       memoize(name, options[:force]) do
+        name = name.to_s
+
         file = file_from_path(name)
         data = HDL::Parser.parse(file.read)
 
@@ -15,7 +17,7 @@ class HDL::Loader
           klass = HDL::PrimitiveChip
         else
           klass = HDL::Chip
-          # load dependencies
+          load_dependencies(data)
         end
 
         klass.new(name, file, data)
@@ -34,7 +36,13 @@ class HDL::Loader
     end
 
     def load_dependencies(data)
+      schema = data[:schema]
+      deps = schema.map(&:keys).flatten
+      deps.uniq!
 
+      deps.uniq.each do |d|
+        load(d)
+      end
     end
 
     def file_from_path(name)
