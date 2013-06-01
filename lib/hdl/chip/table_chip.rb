@@ -1,4 +1,4 @@
-class HDL::TableChip
+class HDL::TableChip < HDL::Chip
 
   attr_reader :name, :path, :inputs, :outputs
 

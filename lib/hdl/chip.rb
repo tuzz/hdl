@@ -1,0 +1,3 @@
+class HDL::Chip
+
+end
