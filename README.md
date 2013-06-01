@@ -96,16 +96,16 @@ chip.internal
 #=> [:x]
 
 chip.components
-#=> { #<Chip: nand> => 2 }
+#=> { #<HDL::Chip nand> => 2 }
 
 chip.primitive? # Does this chip contain a truth table?
 #=> false
 
 chip.primitives
-#=> [#<Chip: nand>]
+#=> [#<HDL::Chip nand>]
 
 chip.dependents # Chips that this chip uses.
-#=> [#<Chip: nand>]
+#=> [#<HDL::Chip nand>]
 
 chip.dependees # Chips that use this chip.
 #=> []
