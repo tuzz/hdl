@@ -9,7 +9,7 @@ describe HDL::PrimitiveChip do
   end
 
   describe "accessors" do
-    its(:name)       { should == :nand }
+    its(:name)       { should == "nand" }
     its(:path)       { should == "/some/path" }
     its(:inputs)     { should == [:a, :b] }
     its(:outputs)    { should == [:out] }
@@ -19,9 +19,7 @@ describe HDL::PrimitiveChip do
     its(:primitives) { should be_empty }
     its(:dependents) { should be_empty }
   end
-
-  describe "#inspect" do
-    it "keeps things simple" do
+describe "#inspect" do it "keeps things simple" do
       pending "delegate to super"
       subject.inspect.should == "#<HDL::Chip nand>"
     end

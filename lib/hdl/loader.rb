@@ -17,10 +17,9 @@ class HDL::Loader
           klass = HDL::PrimitiveChip
         else
           klass = HDL::Chip
-          load_dependencies(data)
         end
 
-        klass.new(name, file, data)
+        klass.new(name, file.path, data)
       end
     end
 
@@ -32,16 +31,6 @@ class HDL::Loader
         @memo[key]
       else
         @memo[key] = yield
-      end
-    end
-
-    def load_dependencies(data)
-      schema = data[:schema]
-      deps = schema.map(&:keys).flatten
-      deps.uniq!
-
-      deps.uniq.each do |d|
-        load(d)
       end
     end
 

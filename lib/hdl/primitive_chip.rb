@@ -2,6 +2,14 @@ class HDL::PrimitiveChip
 
   attr_reader :name, :path, :inputs, :outputs
 
+  def initialize(name, path, data)
+    @name    = name.to_s
+    @path    = path
+    @inputs  = data[:inputs]
+    @outputs = data[:outputs]
+    @table   = data[:table]
+  end
+
   def internal;   [] end
   def components; [] end
   def primitives; [] end
@@ -9,14 +17,6 @@ class HDL::PrimitiveChip
 
   def primitive?
     true
-  end
-
-  def initialize(name, path, data)
-    @name    = name.to_sym
-    @path    = path
-    @inputs  = data[:inputs]
-    @outputs = data[:outputs]
-    @table   = data[:table]
   end
 
   def evaluate(pins = {})

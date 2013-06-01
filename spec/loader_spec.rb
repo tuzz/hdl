@@ -19,7 +19,7 @@ describe HDL::Loader do
       chip = klass.load(name)
 
       chip.should be_a(HDL::Chip)
-      chip.name.should == :and
+      chip.name.should == "and"
       chip.path.should == "spec/fixtures/and.hdl"
     end
 
@@ -54,44 +54,6 @@ describe HDL::Loader do
         end
       end
     end
-
-    describe "loading dependencies" do
-      let(:name)  { "mux" }
-      let(:dependencies) { %w(not and or) }
-
-      it "loads chips that this chip depends on" do
-        expectations = [name] + dependencies
-
-        expectations.each do |e|
-          HDL::Chip.should_receive(:new).
-            with(e, anything, anything).
-            exactly(:once)
-        end
-
-        chip = klass.load(name)
-        pending "waiting on chip implementation"
-        chip.dependencies.map(&:name).should == dependencies
-      end
-
-      it "acts recursively" do
-        HDL::PrimitiveChip.should_receive(:new).
-          with("nand", anything, anything).
-          exactly(:once)
-
-        klass.load(name)
-      end
-
-      it "treats primitives as the base case" do
-        HDL::Chip.should_not_receive(:new)
-
-        HDL::PrimitiveChip.should_receive(:new).
-          with("nand", anything, anything).
-          exactly(:once)
-
-        klass.load("nand")
-      end
-    end
-
   end
 
 end
