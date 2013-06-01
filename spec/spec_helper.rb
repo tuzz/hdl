@@ -3,7 +3,10 @@ require "hdl"
 
 RSpec.configure do |config|
   config.before do
-    HDL.path = nil # Reset to default
+    # Reset the internal state of the loader
+    HDL::Loader.instance_variable_set(:@path, nil)
+    HDL::Loader.instance_variable_set(:@memo, nil)
+
     HDL.path << "spec/fixtures"
   end
 end
