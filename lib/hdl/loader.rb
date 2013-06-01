@@ -16,7 +16,7 @@ class HDL::Loader
         if data[:table]
           klass = HDL::TableChip
         else
-          klass = HDL::Chip
+          klass = HDL::SchemaChip
         end
 
         klass.new(name, file.path, data)

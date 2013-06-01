@@ -18,7 +18,7 @@ describe HDL::Loader do
     it "returns an instance of chip" do
       chip = klass.load(name)
 
-      chip.should be_a(HDL::Chip)
+      chip.should be_a(HDL::SchemaChip)
       chip.name.should == "and"
       chip.path.should == "spec/fixtures/and.hdl"
     end
@@ -35,18 +35,18 @@ describe HDL::Loader do
 
     context "when the file has already been loaded" do
       it "returns a memoized version" do
-        HDL::Chip.should_receive(:new).exactly(:once)
+        HDL::SchemaChip.should_receive(:new).exactly(:once)
         2.times { klass.load(name) }
       end
 
       context "and the 'force' option is set" do
         it "does not return a memoized version" do
-          HDL::Chip.should_receive(:new).exactly(:twice)
+          HDL::SchemaChip.should_receive(:new).exactly(:twice)
           2.times { klass.load(name, :force => true) }
         end
 
         it "still memoizes the result for future loads" do
-          HDL::Chip.should_receive(:new).exactly(:twice)
+          HDL::SchemaChip.should_receive(:new).exactly(:twice)
 
           klass.load(name)
           klass.load(name, :force => true)

@@ -1,11 +1,11 @@
 require "spec_helper"
 
-describe HDL::Chip do
+describe HDL::SchemaChip do
   subject do
     input = File.read("spec/fixtures/and.hdl")
     data = HDL::Parser.parse(input)
 
-    HDL::Chip.new("and", "/some/path", data)
+    HDL::SchemaChip.new("and", "/some/path", data)
   end
 
   describe "accessors" do
