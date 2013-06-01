@@ -5,10 +5,13 @@ class HDL::TableChip < HDL::Chip
     @table = data[:table]
   end
 
-  def internal;   [] end
-  def components; [] end
-  def primitives; [] end
-  def dependents; [] end
+  def internal
+    []
+  end
+
+  def components
+    {}
+  end
 
   def primitive?
     true

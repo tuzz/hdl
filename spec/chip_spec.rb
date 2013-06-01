@@ -1,20 +1,39 @@
 require "spec_helper"
 
-describe HDL::SchemaChip do
-  subject do
-    input = File.read("spec/fixtures/and.hdl")
-    data = HDL::Parser.parse(input)
-
-    HDL::SchemaChip.new("and", "/some/path", data)
+describe HDL::Chip do
+  let(:data) do
+    {
+      :inputs => [:a, :b],
+      :outputs => [:out]
+    }
   end
 
+  subject { HDL::Chip.new("abstract", "/some/path", data) }
+
   describe "accessors" do
-    its(:name)       { should == "and" }
+    its(:name)       { should == "abstract" }
     its(:path)       { should == "/some/path" }
     its(:inputs)     { should == [:a, :b] }
     its(:outputs)    { should == [:out] }
-    its(:primitive?) { should be_false }
-    its(:internal)   { should == [:x] }
+  end
+
+  describe "#inspect" do
+    it "keeps things simple" do
+      subject.inspect.should == "#<HDL::Chip abstract>"
+    end
+  end
+
+  describe "#primitives" do
+    before do
+      @mock_primitive = mock(:primitive, :primitive? => true)
+      mock_schema = mock(:schema, :primitive? => false)
+      array = [@mock_primitive, mock_schema]
+      subject.stub(:dependents).and_return(array)
+    end
+
+    it "returns an array of dependent primitive chips" do
+      subject.primitives.should == [@mock_primitive]
+    end
   end
 
   describe "#dependents" do
@@ -31,6 +50,10 @@ describe HDL::SchemaChip do
   end
 
   describe "#dependees" do
+    subject do
+      HDL::Loader.load("and")
+    end
+
     before do
       HDL::Loader.load("half_adder")
     end
@@ -50,11 +73,4 @@ describe HDL::SchemaChip do
     end
   end
 
-  describe "#components" do
-    pending
-  end
-
-#    its(:components) { should be_empty }
-#    its(:primitives) { should be_empty }
-#    its(:dependents) { should be_empty }
 end

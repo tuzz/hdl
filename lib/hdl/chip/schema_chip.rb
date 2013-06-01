@@ -7,32 +7,36 @@ class HDL::SchemaChip < HDL::Chip
     load_dependencies(:dependents)
   end
 
-  def primitive?
-    false
-  end
-
   def internal
     wiring_values - inputs - outputs - [true, false]
   end
 
-  def dependents
-    load_dependencies(:dependents)
+  def components
+    chips = component_names.map do |c|
+      HDL::Loader.load(c)
+    end
+
+    freq = frequencies(chips)
+    hashes = [freq] + chips.map(&:components)
+
+    hashes.inject({}) do |acc, hash|
+      acc.merge(hash) { |_, a, b| a + b }
+    end
   end
 
-  def dependees
-    load_dependencies(:dependees)
+  def primitive?
+    false
   end
 
   private
   def create_dependencies
-    @schema.map(&:keys).flatten.each do |dep|
+    component_names.each do |dep|
       HDL::Dependency.create(name, dep.to_s)
     end
   end
 
-  def load_dependencies(type)
-    deps = HDL::Dependency.send("#{type}_for", name)
-    deps.map { |d| HDL::Loader.load(d) }
+  def component_names
+    @schema.map(&:keys).flatten
   end
 
   def wiring
@@ -41,6 +45,13 @@ class HDL::SchemaChip < HDL::Chip
 
   def wiring_values
     wiring.map(&:values).flatten.uniq
+  end
+
+  def frequencies(array)
+    array.inject(Hash.new(0)) do |hash, element|
+      hash[element] += 1
+      hash
+    end
   end
 
 end

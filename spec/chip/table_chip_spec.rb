@@ -9,20 +9,9 @@ describe HDL::TableChip do
   end
 
   describe "accessors" do
-    its(:name)       { should == "nand" }
-    its(:path)       { should == "/some/path" }
-    its(:inputs)     { should == [:a, :b] }
-    its(:outputs)    { should == [:out] }
-    its(:primitive?) { should be_true }
     its(:internal)   { should be_empty }
     its(:components) { should be_empty }
-    its(:primitives) { should be_empty }
-    its(:dependents) { should be_empty }
-  end
-describe "#inspect" do it "keeps things simple" do
-      pending "delegate to super"
-      subject.inspect.should == "#<HDL::Chip nand>"
-    end
+    its(:primitive?) { should be_true }
   end
 
   describe "#evaluate" do
@@ -55,10 +44,6 @@ describe "#inspect" do it "keeps things simple" do
         subject.evaluate(:a => false)
       }.to raise_error(ArgumentError, /Expecting inputs \[:a, :b\]/)
     end
-  end
-
-  describe "#dependees" do
-    pending "set up some chips that use nand"
   end
 
 end
