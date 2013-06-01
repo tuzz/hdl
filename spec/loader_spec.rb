@@ -15,13 +15,12 @@ describe HDL::Loader do
   end
 
   describe ".load" do
-    it "parses the named hdl file from the path" do
-      klass.should_receive(:parse).with(
-        name,
-        definition,
-        :path => "spec/fixtures/and.hdl"
-      )
-      klass.load(name)
+    it "returns an instance of chip" do
+      chip = klass.load(name)
+
+      chip.should be_a(HDL::Chip)
+      chip.name.should == :and
+      chip.path.should == "spec/fixtures/and.hdl"
     end
 
     context "when the file does not exist" do
@@ -35,23 +34,19 @@ describe HDL::Loader do
     end
 
     context "when the file has already been loaded" do
-      before do
-        klass.stub(:parse) # fixme
-      end
-
       it "returns a memoized version" do
-        File.should_receive(:read).exactly(:once)
+        HDL::Chip.should_receive(:new).exactly(:once)
         2.times { klass.load(name) }
       end
 
       context "and the 'force' option is set" do
         it "does not return a memoized version" do
-          File.should_receive(:read).exactly(:twice)
+          HDL::Chip.should_receive(:new).exactly(:twice)
           2.times { klass.load(name, :force => true) }
         end
 
         it "still memoizes the result for future loads" do
-          File.should_receive(:read).exactly(:twice)
+          HDL::Chip.should_receive(:new).exactly(:twice)
 
           klass.load(name)
           klass.load(name, :force => true)

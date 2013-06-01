@@ -9,12 +9,17 @@ class HDL::Loader
     def load(name, options = {})
       memoize(name, options[:force]) do
         file = file_from_path(name)
-        parse(name, File.read(file), :path => file)
-      end
-    end
+        data = HDL::Parser.parse(file.read)
 
-    def parse(name, definition, options = {})
-      raise NotImplementedError
+        if data[:table]
+          klass = HDL::PrimitiveChip
+        else
+          klass = HDL::Chip
+          # load dependencies
+        end
+
+        klass.new(name, file, data)
+      end
     end
 
     private
@@ -28,10 +33,14 @@ class HDL::Loader
       end
     end
 
+    def load_dependencies(data)
+
+    end
+
     def file_from_path(name)
       path.each do |p|
-        file = File.join(p, name) + ".hdl"
-        return file if File.exists?(file)
+        q = File.join(p, name) + ".hdl"
+        return File.new(q) if File.exists?(q)
       end
 
       err = "Could not locate chip definition for `#{name}'"
