@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = "hdl"
   s.version     = HDL.version
   s.summary     = "HDL"
-  s.description = "A simple parser for a minimalist hardware description language."
+  s.description = "A parser and emulator for a minimalist hardware description language."
   s.author      = "Chris Patuzzo"
   s.email       = "chris@patuzzo.co.uk"
   s.homepage    = "https://github.com/cpatuzzo/hdl"

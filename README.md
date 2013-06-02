@@ -1,8 +1,6 @@
 ## HDL
 
-Coming soon...
-
-A simple parser for a minimalist [hardware description language](http://en.wikipedia.org/wiki/Hardware_description_language).
+A parser and emulator for a minimalist [hardware description language](http://en.wikipedia.org/wiki/Hardware_description_language).
 
 ## Chips
 
@@ -110,3 +108,20 @@ chip.dependents # Chips that this chip uses.
 chip.dependees # Chips that use this chip.
 #=> []
 ```
+
+## Contribution
+
+I'm not an electronics engineer. If you are, you could probably build in all kinds of cool features and optimisations.
+
+Here a few features that might be in the pipeline:
+
+* Let me build a CNF expression for a chip
+* Query method for circuit fan-outs for chips
+* Evaluate and return outputs with internal pins
+* Support for buses, mostly for convenience
+* Pushing stricter validations to parse time
+* Cleaner decoupling between the parser and evaluator
+
+If you'd like to build any of these features, I'd be super grateful. Send me a pull request, or open an issue.
+
+You should follow me on [twitter](http://twitter.com/cpatuzzo).
