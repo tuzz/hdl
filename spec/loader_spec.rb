@@ -54,6 +54,23 @@ describe HDL::Loader do
         end
       end
     end
+
+    context "when given a definition string" do
+      it "does not raise a file not found" do
+        expect do
+          foo = klass.load(
+            "foo", :definition => <<-HDL
+              inputs a, b
+              outputs out
+
+              and(a=a, b=b, out=out)
+            HDL
+          )
+
+          foo.name.should be_nil
+        end.to_not raise_error(FileNotFound)
+      end
+    end
   end
 
 end

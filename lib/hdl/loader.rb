@@ -10,8 +10,16 @@ class HDL::Loader
       memoize(name, options[:force]) do
         name = name.to_s
 
-        file = file_from_path(name)
-        data = HDL::Parser.parse(file.read)
+        if (d = options[:definition])
+          raw = d
+          path = nil
+        else
+          file = file_from_path(name)
+          raw  = file.read
+          path = file.path
+        end
+
+        data = HDL::Parser.parse(raw)
 
         if data[:table]
           klass = HDL::TableChip
@@ -19,7 +27,7 @@ class HDL::Loader
           klass = HDL::SchemaChip
         end
 
-        klass.new(name, file.path, data)
+        klass.new(name, path, data)
       end
     end
 

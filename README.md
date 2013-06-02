@@ -49,7 +49,7 @@ Now that we've satisfied the 'nand' dependency, we can write some Ruby:
 require "hdl"
 
 chip = HDL.load("and")
-chip.eval(a: true, b: false)
+chip.evaluate(a: true, b: false)
 #=> { out: false }
 ```
 
