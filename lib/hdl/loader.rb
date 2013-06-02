@@ -34,6 +34,7 @@ class HDL::Loader
     private
     def memoize(key, override, &block)
       @memo ||= {}
+      key = key.to_s
 
       if @memo.has_key?(key) && !override
         @memo[key]

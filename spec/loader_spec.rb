@@ -70,6 +70,28 @@ describe HDL::Loader do
           foo.name.should be_nil
         end.to_not raise_error(FileNotFound)
       end
+
+      it "keeps track of the definition" do
+          foo = klass.load(
+            "foo", :definition => <<-HDL
+              inputs a, b
+              outputs out
+
+              and(a=a, b=b, out=out)
+            HDL
+          )
+
+          expect {
+            klass.load(
+              "bar", :definition => <<-HDL
+                inputs a, b
+                outputs out
+
+                foo(a=a, b=b, out=out)
+              HDL
+            )
+          }.to_not raise_error(FileNotFound)
+      end
     end
   end
 
