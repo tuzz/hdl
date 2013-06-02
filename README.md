@@ -115,7 +115,8 @@ I'm not an electronics engineer. If you are, you could probably build in all kin
 
 Here are a few features that might be in the pipeline:
 
-* Let me build a CNF expression for a chip
+* A bespoke test framework that uses tabular test files
+* Support for generating conjunctive normal form expressions
 * Query method for circuit fan-outs for chips
 * Evaluate and return outputs with internal pins
 * Support for buses, mostly for convenience
