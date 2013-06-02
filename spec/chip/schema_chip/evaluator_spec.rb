@@ -95,6 +95,4 @@ describe HDL::SchemaChip::Evaluator do
     }
   end
 
-  it "raises errors if no new info......."
-
 end

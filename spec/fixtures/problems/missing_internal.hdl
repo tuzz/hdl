@@ -1,0 +1,5 @@
+inputs in
+outputs out
+
+not(in=missing, out=x)
+not(in=in, out=out)

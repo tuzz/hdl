@@ -44,9 +44,9 @@ class HDL::Dependency
 
     def check_for_cycles!(dependee, dependent)
       if dependee == dependent
-        err = "#{dependee} cannot depend on itself"
+        err = "'#{dependee}` cannot depend on itself"
       elsif dependees_for(dependee).include?(dependent)
-        err = "#{dependee} and #{dependent} depend on each other"
+        err = "'#{dependee}` and '#{dependent}` depend on each other"
       end
 
       raise CircularError, err if err

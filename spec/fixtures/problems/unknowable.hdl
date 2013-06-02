@@ -1,0 +1,7 @@
+inputs  in
+outputs out
+
+and(a=in, b=x, out=y)
+and(a=in, b=y, out=x)
+not(in=x, out=y)
+not(in=in, out=out)

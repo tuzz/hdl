@@ -1,0 +1,4 @@
+inputs  in
+outputs out
+
+self_referential(in=in, out=out)

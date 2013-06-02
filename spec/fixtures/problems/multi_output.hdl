@@ -1,0 +1,5 @@
+inputs in
+outputs out
+
+not(in=in, out=out)
+not(in=in, out=out)

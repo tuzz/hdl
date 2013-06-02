@@ -1,0 +1,4 @@
+inputs  in
+outputs out
+
+circular_a(in=in, out=out)

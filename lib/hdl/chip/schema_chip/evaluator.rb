@@ -20,9 +20,6 @@ class HDL::SchemaChip::Evaluator
     chip, inputs, outputs = line
 
     chip_in  = connect_inputs(inputs, pins)
-    if chip_in.any? { |k, v| v.nil? }
-      raise @chip.name
-    end
     chip_out = chip.evaluate(chip_in)
 
     connect_outputs(outputs, chip_out)
@@ -59,10 +56,7 @@ class HDL::SchemaChip::Evaluator
       outputs_for_line(line)
     end.flatten
 
-    if known_outputs.empty?
-      raise [@chip.name, schema_lines.to_a].inspect
-    end
-    check_for_new_information!(known_outputs, schema_lines)
+    check_for_new_information!(known_outputs, unknown)
 
     if unknown.any?
       # Recursive case.
@@ -104,10 +98,19 @@ class HDL::SchemaChip::Evaluator
     line.last.values
   end
 
-  def check_for_new_information!(information, lines)
+  def check_for_new_information!(information, unknown)
     if information.empty?
-      # FIXME
-      raise NotImplementError
+      p = unknown.map do |(chip, _, _), exp|
+        { (exp + 1) => chip.name }.inspect
+      end.join(", ")
+
+      if unknown.size == 1
+        err = "Unknown internal pin for expression: #{p}"
+      else
+        err = "Unknowable internal pins for expressions: #{p}"
+      end
+
+      raise CircularError, err
     end
   end
 

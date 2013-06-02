@@ -1,0 +1,4 @@
+inputs  in
+outputs out
+
+circular_b(in=in, out=out)

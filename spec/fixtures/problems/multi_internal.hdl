@@ -1,0 +1,8 @@
+inputs  in
+outputs out
+
+# Tries to set internal pin 'x' twice.
+and(a=in, b=in, out=x)
+and(a=in, b=in, out=x)
+
+not(in=x, out=out)

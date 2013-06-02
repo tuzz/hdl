@@ -1,0 +1,5 @@
+inputs  in
+outputs out
+
+# Does not use 'out'.
+and(a=in, b=in, out=x)
