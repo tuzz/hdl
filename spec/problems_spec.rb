@@ -39,11 +39,11 @@ describe HDL do
 
     expect {
       HDL.load("unused_inputs")
-    }.to raise_error(/`in' is not connected/)
+    }.to raise_error(/input `in' is not connected/)
 
     expect {
       HDL.load("unused_outputs")
-    }.to raise_error(/`out' is not connected/)
+    }.to raise_error(/output `out' is not connected/)
 
     expect {
       HDL.load("missing_internal")
@@ -53,11 +53,9 @@ describe HDL do
       HDL.load("dual_internal")
     }.to raise_error(/Unknown internal pin/)
 
-    pending
     expect {
       HDL.load("multi_internal")
-    }.to raise_error(/xxx/)
-
+    }.to raise_error(/internal pin `x' is set multiple times/)
   end
 
 end

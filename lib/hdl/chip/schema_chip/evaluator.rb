@@ -5,6 +5,8 @@ class HDL::SchemaChip::Evaluator
     @schema = schema
     @parts  = partition_io
     @order  = evaluation_order(@parts, chip.inputs)
+
+    check_multi_internal!
   end
 
   def evaluate(pins)
@@ -111,6 +113,24 @@ class HDL::SchemaChip::Evaluator
       end
 
       raise CircularError, err
+    end
+  end
+
+  # We can't check this at parse time because we
+  # don't know which are getters/setters.
+  def check_multi_internal!
+    set_pins = @parts.map do |_, _, outputs|
+      outputs.values
+    end.flatten
+
+    repetitions = set_pins.select { |p| set_pins.count(p) > 1 }.uniq
+    if repetitions.size == 1
+      err = "The internal pin `#{repetitions.first}' is set multiple times"
+      raise ParseError, err
+    elsif repetitions.size > 1
+      list = repetitions.join(', ')
+      err = "These internal pins are set multiple times: #{list}"
+      raise ParseError, err
     end
   end
 
