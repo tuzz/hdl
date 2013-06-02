@@ -113,7 +113,7 @@ chip.dependees # Chips that use this chip.
 
 I'm not an electronics engineer. If you are, you could probably build in all kinds of cool features and optimisations.
 
-Here a few features that might be in the pipeline:
+Here are a few features that might be in the pipeline:
 
 * Let me build a CNF expression for a chip
 * Query method for circuit fan-outs for chips
