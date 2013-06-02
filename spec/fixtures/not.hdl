@@ -1,4 +1,4 @@
 inputs  in
 outputs out
 
-nand(a=0, b=in, out=out)
+nand(a=in, b=in, out=out)

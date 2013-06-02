@@ -23,7 +23,7 @@ describe HDL::Chip do
     end
   end
 
-  describe "#primitives" do
+  describe "#primitibves" do
     before do
       @mock_primitive = mock(:primitive, :primitive? => true)
       mock_schema = mock(:schema, :primitive? => false)

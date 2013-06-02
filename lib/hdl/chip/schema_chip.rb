@@ -5,6 +5,7 @@ class HDL::SchemaChip < HDL::Chip
     @schema = data[:schema]
     create_dependencies
     load_dependencies(:dependents)
+    evaluate_some_expression
   end
 
   def internal
@@ -30,7 +31,7 @@ class HDL::SchemaChip < HDL::Chip
 
   def evaluate(pins = {})
     check_pins!(pins)
-    Evaluator.evaluate(pins)
+    evaluator.evaluate(pins)
   end
 
   private
@@ -52,11 +53,22 @@ class HDL::SchemaChip < HDL::Chip
     wiring.map(&:values).flatten.uniq
   end
 
+  def evaluator
+    @evaluator ||= Evaluator.new(self, @schema)
+  end
+
   def frequencies(array)
     array.inject(Hash.new(0)) do |hash, element|
       hash[element] += 1
       hash
     end
+  end
+
+  # Check upfront if there are circular problems
+  # by evaluating something on the chip.
+  def evaluate_some_expression
+    pins = Hash[inputs.zip(inputs.map { true })]
+    evaluate(pins)
   end
 
 end

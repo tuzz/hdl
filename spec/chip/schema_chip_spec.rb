@@ -8,6 +8,15 @@ describe HDL::SchemaChip do
     HDL::SchemaChip.new("and", "/some/path", data)
   end
 
+  describe "#initialize" do
+    it "evaluates an expression on the chip" do
+      HDL::SchemaChip.any_instance.
+        should_receive(:evaluate)
+
+      subject
+    end
+  end
+
   describe "#internal" do
     it "returns an array of the internal pins" do
       subject.internal.should == [:x]
@@ -39,9 +48,18 @@ describe HDL::SchemaChip do
   end
 
   describe "#evaluate" do
-    it "delegates to an evaluator" do
-      HDL::SchemaChip::Evaluator.should_receive(:evaluate)
-      subject.evaluate(:a => true, :b => true)
+    it "evaluates the given expression" do
+      subject.evaluate(:a => false, :b => false).
+        should == { :out => false }
+
+      subject.evaluate(:a => false, :b => true).
+        should == { :out => false }
+
+      subject.evaluate(:a => true, :b => false).
+        should == { :out => false }
+
+      subject.evaluate(:a => true, :b => true).
+        should == { :out => true }
     end
 
     it "raises an argument error if any other pin is set" do
