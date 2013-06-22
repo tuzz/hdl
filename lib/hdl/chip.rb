@@ -38,4 +38,9 @@ class HDL::Chip
     end
   end
 
+  def memoize(pins, &block)
+    @memo ||= {}
+    @memo[pins] ||= yield
+  end
+
 end

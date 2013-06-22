@@ -44,6 +44,12 @@ describe HDL::TableChip do
         subject.evaluate(:a => false)
       }.to raise_error(ArgumentError, /Expecting inputs \[:a, :b\]/)
     end
+
+    it "memoizes the result for faster successive evaluations" do
+      subject.evaluate(:a => true, :b => false)
+      subject.should_not_receive(:check_pins!)
+      subject.evaluate(:a => true, :b => false)
+    end
   end
 
 end

@@ -30,8 +30,10 @@ class HDL::SchemaChip < HDL::Chip
   end
 
   def evaluate(pins = {})
-    check_pins!(pins)
-    evaluator.evaluate(pins)
+    memoize(pins) do
+      check_pins!(pins)
+      evaluator.evaluate(pins)
+    end
   end
 
   private

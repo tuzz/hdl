@@ -18,10 +18,11 @@ class HDL::TableChip < HDL::Chip
   end
 
   def evaluate(pins = {})
-    check_pins!(pins)
-
-    row = find_row(pins)
-    select_outputs(row)
+    memoize(pins) do
+      check_pins!(pins)
+      row = find_row(pins)
+      select_outputs(row)
+    end
   end
 
   private
