@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = "A parser and emulator for a minimalist hardware description language."
   s.author      = "Chris Patuzzo"
   s.email       = "chris@patuzzo.co.uk"
-  s.homepage    = "https://github.com/cpatuzzo/hdl"
+  s.homepage    = "https://github.com/tuzz/hdl"
   s.files       = ["README.md"] + Dir["lib/**/*.*"]
 
   s.add_dependency "treetop"
