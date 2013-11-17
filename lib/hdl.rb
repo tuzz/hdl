@@ -1,6 +1,7 @@
 require "set"
 require "polyglot"
 require "treetop"
+require "boolean_simplifier"
 require "hdl/base"
 require "hdl/loader"
 require "hdl/dependency"

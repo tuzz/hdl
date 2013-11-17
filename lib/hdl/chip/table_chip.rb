@@ -72,26 +72,13 @@ class HDL::TableChip < HDL::Chip
     elsif [true, false].include?(term)
       !term
     else
-      "NOT(#{term})"
+      "!(#{term})"
     end
   end
 
   def expression_for(clauses)
-    expr = clauses.map { |c| c.join(" AND ") }.join(" OR ")
-    simplify(expr)
-  end
-
-  def simplify(expression, previous = nil)
-    this = expression.dup
-
-    # TODO
-
-    # Simplify until no improvements can be made.
-    if this == previous
-      this
-    else
-      simplify(this, this)
-    end
+    expr = clauses.map { |c| c.join(" && ") }.join(" || ")
+    BooleanSimplifier.simplify(expr)
   end
 
 end

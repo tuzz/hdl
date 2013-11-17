@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "treetop"
   s.add_dependency "polyglot"
+  s.add_dependency "boolean_simplifier"
 
   s.add_development_dependency "rspec"
 end
