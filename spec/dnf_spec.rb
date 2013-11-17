@@ -41,8 +41,8 @@ describe "Generating expression in disjunctive normal form" do
     it "collapses terms and clauses" do
       result = subject.evaluate(:a => "x", :b => true)
 
-      # !x && !true           OR  <-- clause disappears
-      # !x &&  true           OR  <--   term disappears
+      # !x && !true           ||  <-- clause disappears
+      # !x &&  true           ||  <--   term disappears
       #  x && !true               <-- clause disappears
 
       result[:out].should == "!x"
@@ -51,20 +51,22 @@ describe "Generating expression in disjunctive normal form" do
     it "evaluates tautologies" do
       result = subject.evaluate(:a => "x", :b => false)
 
-      # !x && !false          OR  <--   term disappears
-      # !x &&  false          OR  <-- clause disappears
+      # !x && !false          ||  <--   term disappears
+      # !x &&  false          ||  <-- clause disappears
       #  x && !false              <--   term disappears
       #
-      # !x OR x <=> true
+      # !x || x <=> true
 
-      result[:out].should be_true
+      result[:out].should eq true
     end
 
     it "evaluates contradictions" do
       subject = HDL.load("and")
       result = subject.evaluate(:a => "x", :b => false)
 
-      pending
+      # x && false <=> false
+
+      result[:out].should eq false
     end
   end
 

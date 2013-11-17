@@ -78,7 +78,15 @@ class HDL::TableChip < HDL::Chip
 
   def expression_for(clauses)
     expr = clauses.map { |c| c.join(" && ") }.join(" || ")
-    BooleanSimplifier.simplify(expr)
+    simplified = BooleanSimplifier.simplify(expr)
+
+    if simplified == "true"
+      true
+    elsif simplified == "false"
+      false
+    else
+      simplified
+    end
   end
 
 end
