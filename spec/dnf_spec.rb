@@ -20,11 +20,11 @@ describe "Generating expression in disjunctive normal form" do
     subject { HDL.load("and") }
 
     it "returns a DNF string from an evaluation" do
-      pending
+      pending "depends on improvements to github.com/tuzz/boolean_simplifier"
 
       result = subject.evaluate(:a => "x", :b => "y")
       raise result[:out]
-      clauses = result[:out].split("OR").map(&:strip)
+      clauses = result[:out].split("||").map(&:strip)
 
       clauses.should =~ [    # | a | b | out |
         # row is false       # | 0 | 0 |  0  |
