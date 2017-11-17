@@ -160,5 +160,3 @@ Here are a few features that might be in the pipeline:
 * Cleaner decoupling between the parser and evaluator
 
 If you'd like to build any of these features, I'd be super grateful. Send me a pull request, or open an issue.
-
-You should follow me on [twitter](http://twitter.com/cpatuzzo).
